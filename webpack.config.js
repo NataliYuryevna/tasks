@@ -12,7 +12,14 @@ module.exports = {
         path: path.resolve(__dirname, 'docs'),
     },
     resolve: {
-        extensions: ['.ts', '.tsx', '.js']
+        extensions: ['.ts', '.tsx', '.js'],
+        alias: {
+            "@app": path.resolve(__dirname, './src/app/index'),
+            "@widgets": path.resolve(__dirname, './src/widgets/index'),
+            "@features": path.resolve(__dirname, './src/features/index'),
+            "@entities": path.resolve(__dirname, './src/entities/index'),
+            "@shared": path.resolve(__dirname, './src/shared/index'),
+        }
     },
     devServer: {
         static: {
