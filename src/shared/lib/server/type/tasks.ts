@@ -3,9 +3,10 @@ interface typeTasks {
     "name": string,
     "description": string,
     "priority": number
-    "completed": boolean
+    "completed": boolean,
+    "date": string
 }
 
 export type typeTaskWithoutId = Omit<typeTasks, 'id'>;
-export type typeTaskForAdd = Omit<typeTasks, 'id'|'completed'|'priority'>
+export type typeTaskForAdd = Omit<typeTasks, 'id'|'completed'|'priority'|'date'>
 export default typeTasks

@@ -17,7 +17,8 @@ const tasksSlice = createSlice({
                         name,
                         description,
                         priority,
-                        completed: false
+                        completed: false,
+                        date: new Date().toString(),
                     }
                 }
             }
@@ -25,7 +26,24 @@ const tasksSlice = createSlice({
     }
 })
 
-export const selectAllTasks = (state: { tasks: typeTasks[] }) => state.tasks;
+function compareFn(a: typeTasks, b:typeTasks) {
+    if (a.priority <  b.priority) {
+        return -1;
+    } else if (a.priority > b.priority) {
+        return 1;
+    } else {
+        const dateA = new Date(a.date).getTime();
+        const dateB = new Date(b.date).getTime()
+        if (dateA > dateB) {
+            return 1;
+        } else if (dateA < dateB) {
+            return -1;
+        }
+        return 0;
+    }
+}
+
+export const selectAllTasks = (state: { tasks: typeTasks[] }) => [...state.tasks].sort(compareFn);
 
 export const {taskAdded} = tasksSlice.actions;
 

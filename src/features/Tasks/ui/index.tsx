@@ -1,6 +1,6 @@
 import type {typeTasks} from "@shared";
 import {selectAllTasks, useTasksSelector} from "../lib";
-import {Table} from "../../../entities/ui"
+import {Table} from "@entities"
 
 interface typePropsTasks {
 }
