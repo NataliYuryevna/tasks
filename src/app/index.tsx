@@ -1,5 +1,5 @@
 import React from 'react';
-import {Tasks} from "@features";
+import {Tasks} from "@widgets";
 function App() {
     return (
         <div className="App">

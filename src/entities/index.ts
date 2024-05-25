@@ -1,1 +1,1 @@
-export {default as Table} from './ui/Table'
+export {Table, Form} from './ui'
