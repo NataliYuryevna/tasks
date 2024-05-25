@@ -1,8 +1,9 @@
 import React from 'react';
+import {Tasks} from "@features";
 function App() {
     return (
         <div className="App">
-            tasks
+            <Tasks/>
         </div>
     );
 }
