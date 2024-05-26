@@ -3,6 +3,7 @@ import {Div} from './index.style';
 
 interface typePropsOverlay {
     changeOverlay: boolean;
+    closeOverlay: ()=>void
 }
 function Overlay(props:React.PropsWithChildren<typePropsOverlay>){
     const [openOverlay, setOpenOverlay] = useState(false);
@@ -11,19 +12,15 @@ function Overlay(props:React.PropsWithChildren<typePropsOverlay>){
         if(props.changeOverlay)
             showOverlay();
         else
-            hiddenOverlay();
+            setOpenOverlay(false);
     }, [props.changeOverlay]);
 
     function showOverlay() {
         setOpenOverlay(true);
     }
 
-    function hiddenOverlay() {
-        setOpenOverlay(false);
-    }
-
     return (<>
-            <Div $hidden={!openOverlay} onClick={hiddenOverlay}>
+            <Div $hidden={!openOverlay} onClick={props.closeOverlay}>
                 {props.children}
             </Div>
         </>

@@ -8,6 +8,7 @@ const Div = styled.div<{$hidden?: boolean;}>`
   width: 100vw;
   height: 100%;
   background: rgba(0, 0, 0, 0.6);
+  z-index: 1;
   ${props =>
         props.$hidden &&
         css`
