@@ -20,7 +20,7 @@ function WidgetShowTask(props:{task:typeTasks|null}) {
 
     return (<Overlay changeOverlay={openTask} closeOverlay={closeTask}>
                 {props.task &&
-                    <ShowTask cancelHandle={closeTask} task={props.task}/>
+                    <ShowTask cancelHandle={closeTask} task={openTask?props.task:null}/>
                 }
             </Overlay>
     );

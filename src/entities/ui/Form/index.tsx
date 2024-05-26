@@ -1,9 +1,9 @@
 import {Button, InputText} from "@shared";
-import type {typeTaskWithoutId, typeTaskForAdd} from "@shared";
+import type {typeTaskForUpdate, typeTaskForAdd} from "@shared";
 import {useRef} from "react";
 import {Form, Buttons} from "./index.style";
 
-interface typePropsForm<T extends typeTaskWithoutId|typeTaskForAdd> {
+interface typePropsForm<T extends typeTaskForUpdate|typeTaskForAdd> {
     cancelHandle:()=>void
     submit: {
         text: string,
@@ -11,13 +11,14 @@ interface typePropsForm<T extends typeTaskWithoutId|typeTaskForAdd> {
     }
     default: T
 }
-function MyForm<T extends typeTaskWithoutId|typeTaskForAdd>( props:typePropsForm<T>) {
+function MyForm<T extends typeTaskForUpdate|typeTaskForAdd>( props:typePropsForm<T>) {
     const refForm = useRef<HTMLFormElement|null>(null);
 
     function handleSubmit() {
         if(refForm.current) {
             // @ts-ignore
-            props.submit.handle({name: refForm.current['name'].value, description: refForm.current['description'].value});
+            const result = Object.keys(props.default).map(key=>({[key]: refForm.current[key].value}))
+            props.submit.handle(Object.assign({}, ...result));
             props.cancelHandle();
         }
     }

@@ -9,4 +9,5 @@ interface typeTasks extends Record<string, string|boolean|number>{
 
 export type typeTaskWithoutId = Omit<typeTasks, 'id'>;
 export type typeTaskForAdd = Omit<typeTasks, 'id'|'completed'|'priority'|'date'>
+export type typeTaskForUpdate = Omit<typeTasks, 'id'|'date'>
 export default typeTasks

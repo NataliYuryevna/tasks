@@ -1,4 +1,4 @@
-import {createSelector, createSlice, nanoid, PayloadAction} from "@reduxjs/toolkit";
+import {createSlice, nanoid, PayloadAction} from "@reduxjs/toolkit";
 import type {typeTasks} from "@shared";
 import {tasksMock} from "@shared";
 
@@ -23,8 +23,25 @@ const tasksSlice = createSlice({
                 }
             }
         },
-        taskDelete(state, action: PayloadAction<{id: string}>) {
-            return state.filter(el=>el.id !== action.payload.id)
+        taskDeleted(state, action: PayloadAction<string>) {
+            return state.filter(el=>el.id !== action.payload)
+        },
+        taskUpdated: {
+            reducer(state, action: PayloadAction<Partial<typeTasks>>) {
+                return state.map(el=>el.id === action.payload.id ? {...el, ...action.payload } : el)
+            },
+            prepare( task:{id: string, name?:string, description?: string, priority?:number, completed?:boolean} ) {
+                return {
+                    payload: {
+                        id: task.id,
+                        name: task.name,
+                        description: task.description,
+                        priority: task.priority,
+                        completed: task.completed,
+                        date: new Date().toString(),
+                    }
+                }
+            }
         }
     }
 })
@@ -48,6 +65,6 @@ function compareFn(a: typeTasks, b:typeTasks) {
 
 export const selectAllTasks = (state: { tasks: typeTasks[] }) => [...state.tasks].sort(compareFn);
 
-export const {taskAdded, taskDelete} = tasksSlice.actions;
+export const {taskAdded, taskDeleted, taskUpdated} = tasksSlice.actions;
 
 export default tasksSlice.reducer

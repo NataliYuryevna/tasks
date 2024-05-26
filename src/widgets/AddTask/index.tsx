@@ -16,7 +16,7 @@ function WidgetAddTask() {
     return (<>
             <Button text={'Add new task'}  onClick={openAddTask}/>
             <Overlay changeOverlay={openForm} closeOverlay={closeAddTask}>
-                <AddTask cancelHandle={closeAddTask}/>
+                {openForm && <AddTask cancelHandle={closeAddTask}/>}
             </Overlay>
         </>
     );
