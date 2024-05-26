@@ -1,4 +1,4 @@
-import {createSlice, nanoid, PayloadAction} from "@reduxjs/toolkit";
+import {createSelector, createSlice, nanoid, PayloadAction} from "@reduxjs/toolkit";
 import type {typeTasks} from "@shared";
 import {tasksMock} from "@shared";
 
@@ -63,7 +63,27 @@ function compareFn(a: typeTasks, b:typeTasks) {
     }
 }
 
+function compareFnCompleted(a: typeTasks, b:typeTasks) {
+    if (a.completed ===  b.completed ) {
+        return compareFn(a,b)
+    } else if(a.completed === true) {
+        return -1;
+    }
+    return 1;
+}
+
 export const selectAllTasks = (state: { tasks: typeTasks[] }) => [...state.tasks].sort(compareFn);
+
+export const selectSortTasks = createSelector(
+    (state: {tasks:typeTasks[]}) => state.tasks,
+    (_:{ tasks: typeTasks[] }, sort: boolean) => sort,
+    (tasks: typeTasks[], sort: boolean) => {
+        if(sort) {
+            return [...tasks].sort(compareFnCompleted)
+        }
+        return [...tasks].sort(compareFn);
+    },
+)
 
 export const {taskAdded, taskDeleted, taskUpdated} = tasksSlice.actions;
 
