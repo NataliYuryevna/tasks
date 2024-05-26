@@ -1,4 +1,4 @@
-interface typeTasks {
+interface typeTasks extends Record<string, string|boolean|number>{
     "id": string,
     "name": string,
     "description": string,

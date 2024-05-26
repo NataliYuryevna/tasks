@@ -1,1 +1,1 @@
-export {Table, Form} from './ui'
+export {Table, Form, Text, Overlay} from './ui'

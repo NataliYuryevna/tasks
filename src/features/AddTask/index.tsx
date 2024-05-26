@@ -13,7 +13,7 @@ function AddTask(props:typePropsAddTasks) {
 
     function addTask( task: typeTaskForAdd) {
         dispatch(
-            taskAdded(task['name'], task['description'], 0)
+            taskAdded(task['name'].toString(), task['description'].toString(), 0)
         )
     }
 

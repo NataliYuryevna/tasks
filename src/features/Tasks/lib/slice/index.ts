@@ -22,6 +22,9 @@ const tasksSlice = createSlice({
                     }
                 }
             }
+        },
+        taskDelete(state, action: PayloadAction<{id: string}>) {
+            return state.filter(el=>el.id !== action.payload.id)
         }
     }
 })
@@ -45,6 +48,6 @@ function compareFn(a: typeTasks, b:typeTasks) {
 
 export const selectAllTasks = (state: { tasks: typeTasks[] }) => [...state.tasks].sort(compareFn);
 
-export const {taskAdded} = tasksSlice.actions;
+export const {taskAdded, taskDelete} = tasksSlice.actions;
 
 export default tasksSlice.reducer

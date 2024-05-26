@@ -1,29 +1,32 @@
 import type {typeTasks} from "@shared";
+import {useTaskContext} from "./task.context";
+import {Table, Td, Th, Tr} from './index.style'
 
 interface typePropsTable<T extends typeTasks> {
     body: Array<T>,
     head: Array<string>
 }
 
-function Table<T extends typeTasks>(props:typePropsTable<T>) {
+function MyTable<T extends typeTasks>(props:typePropsTable<T>) {
 
+    const {onClickTask} = useTaskContext();
 
-    return (<table>
+    return (<Table>
             <thead>
-                <tr>
-                    {props.head.map((el,index)=><th key={index}>{el as string}</th>)}
-                </tr>
+                <Tr $classTr={'head'}>
+                    {props.head.map((el,index)=><Th key={index}>{el as string}</Th>)}
+                </Tr>
             </thead>
             <tbody>
-                {props.body.map(row => <tr key={row.id}>
+                {props.body.map(row => <Tr key={row.id}>
                     {props.head.map((el:string,index:number)=>
-                           <td key={index}>{row[el as keyof T] as typeTasks[keyof typeTasks]}</td>
+                           <Td key={index} onDoubleClick={()=>onClickTask(row)}>{row[el as keyof T] as typeTasks[keyof typeTasks]}</Td>
                     )}
-                </tr>)
+                </Tr>)
                 }
             </tbody>
-        </table>
+        </Table>
     );
 }
 
-export default Table;
+export default MyTable;

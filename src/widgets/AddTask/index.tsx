@@ -1,9 +1,9 @@
 import React, {useState} from 'react';
 import {Button} from "@shared";
 import {AddTask} from "@features";
-import {Div } from './index.style'
+import {Overlay} from "@entities";
 function WidgetAddTask() {
-    const [openForm, setOpenForm] = useState(false)
+    const [openForm, setOpenForm] = useState(false);
 
     function openAddTask() {
         setOpenForm(true);
@@ -14,10 +14,10 @@ function WidgetAddTask() {
     }
 
     return (<>
-            <Button text={'Add'}  onClick={openAddTask}/>
-            <Div $hidden={!openForm} onClick={closeAddTask}>
+            <Button text={'Add new task'}  onClick={openAddTask}/>
+            <Overlay changeOverlay={openForm}>
                 <AddTask cancelHandle={closeAddTask}/>
-            </Div>
+            </Overlay>
         </>
     );
 }

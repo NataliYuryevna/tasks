@@ -1,20 +1,22 @@
-import React, {useState} from 'react';
 import {Tasks} from "@features";
-import {AddTask} from "@widgets";
+import {AddTask, ShowTask, TaskProvider} from "@widgets";
+import type {typeTasks} from "@shared";
+import {useState} from "react";
 function AllTasks() {
-    const [openForm, setOpenForm] = useState(false)
 
-    function openAddTask() {
-        setOpenForm(true);
+    const [task, setTask] = useState<typeTasks|null>(null)
+
+    function onClickTask(task: typeTasks) {
+        setTask(task)
     }
 
-    function closeAddTask() {
-        setOpenForm(false);
-    }
 
     return (<>
-        <AddTask/>
-        <Tasks/>
+            <AddTask/>
+            <ShowTask task={task}/>
+            <TaskProvider onClickTask={onClickTask}>
+                <Tasks/>
+            </TaskProvider>
         </>
     );
 }
