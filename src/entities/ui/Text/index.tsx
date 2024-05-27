@@ -1,7 +1,7 @@
 import React, {ReactNode} from 'react';
 import {P} from "./index.style";
 
-type ObjText = Record<string, string|boolean|number>;
+type ObjText = Record<string, string|boolean|number|undefined>;
 interface typePropsText {
     text: ObjText|string
 }
@@ -16,9 +16,10 @@ function MyText(props:React.PropsWithChildren<typePropsText>) {
                         <span>{el}:</span>
                         <span>{(()=>{
                             const text = (props.text as ObjText)[el];
-                            if (typeof text !== 'boolean')
-                                return (props.text as ObjText)[el].toString();
-                            else return (text ? 'true' : 'false')})()}</span>
+                                if (typeof text !== 'boolean' )
+                                    return text?.toString();
+                                else return (text ? 'true' : 'false')
+                        })()}</span>
                     </P>)
             }
             {props.children}
