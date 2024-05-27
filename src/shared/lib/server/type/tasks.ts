@@ -1,10 +1,10 @@
-interface typeTasks extends Record<string, string|boolean|number>{
+interface typeTasks extends Record<string, string|boolean|number|undefined>{
     "id": string,
     "name": string,
     "description": string,
     "priority": number
     "completed": boolean,
-    "date": string
+    "date"?: string
 }
 
 export type typeTaskWithoutId = Omit<typeTasks, 'id'>;

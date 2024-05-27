@@ -1,4 +1,4 @@
-export {tasksMock, omit} from './lib';
+export {tasksMock, omit, getStorageValue, updateStorage} from './lib';
 export type {typeTasks, typeTaskWithoutId, typeTaskForAdd, typeTaskForUpdate} from './lib';
 export {default as Button} from './ui/Button'
 export {default as InputText} from './ui/InputText';
